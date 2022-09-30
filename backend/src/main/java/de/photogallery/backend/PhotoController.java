@@ -1,10 +1,12 @@
-package photogallery.backend;
+package de.photogallery.backend;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
@@ -12,14 +14,9 @@ import java.util.List;
 public class PhotoController {
     private final PhotoService photoService;
 
-    @GetMapping()
-    List<Photo> getPhotos() {
-        return photoService.getPhotos();
-    }
-
-    @PostMapping()
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public Photo addPhoto(@RequestBody Photo newPhoto) {
+    @PostMapping("")
+    public Photo addPhoto(@RequestParam("newPhoto") MultipartFile newPhoto)
+            throws IOException {
         return photoService.addPhoto(newPhoto);
     }
 }

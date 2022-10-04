@@ -6,8 +6,8 @@ import org.springframework.data.annotation.Id;
 
 @AllArgsConstructor
 @Data
-public class Photo {
+public class PhotoInBase64 {
     @Id
     String id;
-    byte[] newPhoto;
+    String photo;
 }

@@ -1,53 +1,25 @@
-import React, {FormEvent, useState} from 'react';
-import './App.css';
-import usePhotos from './hooks/usePhoto';
-import 'react-toastify/dist/ReactToastify.css';
-import {toast, ToastContainer} from 'react-toastify';
+import React from "react";
+import {HashRouter, Route, Routes} from "react-router-dom";
+import usePhoto from "./hooks/usePhoto";
+import Navigation from "./Navigation";
+import Upload from "./Upload";
+import Gallery from "./Gallery";
 
 export default function App() {
 
-    const {addPhoto} = usePhotos();
-    const [newPhoto, setNewPhoto] = useState<File | undefined>(undefined);
+    const {photos, addPhoto} = usePhoto();
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const photo = ()=> {if (event.target.files !== null) {
-            return event.target.files[0]
-        }}
-        setNewPhoto(photo())
+    if (!photos) return (<>Loading...</>)
+        return (
+            <HashRouter>
+                <Navigation/>
+                <Routes>
+                    <Route path={"/"}
+                           element={<Gallery photos={photos} />}/>
+                    <Route path={"upload/"}
+                           element={<Upload addPhoto={addPhoto}/>}/>
+                </Routes>
+            </HashRouter>
+
+        )
     }
-
-    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (newPhoto !== undefined) {
-            addPhoto(newPhoto)
-                .then(() => setNewPhoto(undefined))
-                .catch((error) => toast.error("File could not be saved."))
-        } else toast.error("Please chose a photo.")
-    }
- //   if (!photos) {
- //       return (<>error: photos undefined</>)
- //   }
-    return (
-        <section>
-            Upload a photo!
-            <form onSubmit={onSubmit}>
-                <label htmlFor="upload photo">Select a file:</label>
-                <input type="file" id="input" accept="image/png, image/jpeg" onChange={onChange}/>
-                <button>Upload</button>
-            </form>
-
-            <ToastContainer closeButton={false} position="bottom-right" hideProgressBar={true} closeOnClick={true}
-                            autoClose={2000}/>
-        </section>
-    );
-}
-
-
-// <article>
-//                 {photos.map(photo => (
-//                         <p key={photo.id} className="venues">
-//                             {photo.id}
-//                         </p>
-//                     )
-//                 )}
-//             </article>

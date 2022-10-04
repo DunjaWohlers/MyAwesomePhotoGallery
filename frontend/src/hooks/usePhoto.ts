@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {v4 as uuidv4} from "uuid";
 
 export type Photo = {
     id: string,
-    photo: readonly string[]
+    photo: string
 }
 
 export default function usePhotos() {
@@ -12,7 +11,7 @@ export default function usePhotos() {
     const [photos, setPhotos] = useState<Photo[]>()
 
     const getPhotos = () => {
-        axios.get("/photos")
+        axios.get("photos/")
             .then(response => {
                 return response.data
             })
@@ -24,11 +23,7 @@ export default function usePhotos() {
         () => getPhotos(), []
     )
 
-    const id = uuidv4();
-
     const addPhoto = (newPhoto: File) => {
-
-
         let formData = new FormData()
         formData.append("newPhoto", newPhoto)
 

@@ -4,6 +4,8 @@ import usePhoto from "./hooks/usePhoto";
 import Navigation from "./Navigation";
 import Upload from "./Upload";
 import Gallery from "./Gallery";
+import Header from "./Header";
+import {ToastContainer} from "react-toastify";
 
 export default function App() {
 
@@ -12,6 +14,7 @@ export default function App() {
     if (!photos) return (<>Loading...</>)
         return (
             <HashRouter>
+                <Header/>
                 <Navigation/>
                 <Routes>
                     <Route path={"/"}
@@ -19,6 +22,8 @@ export default function App() {
                     <Route path={"upload/"}
                            element={<Upload addPhoto={addPhoto}/>}/>
                 </Routes>
+                <ToastContainer closeButton={false} position="bottom-right" hideProgressBar={true} closeOnClick={true}
+                                autoClose={2000}/>
             </HashRouter>
 
         )

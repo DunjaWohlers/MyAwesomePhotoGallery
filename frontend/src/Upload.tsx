@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from 'react';
-import './App.css';
+import './Upload.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from 'react-toastify';
 
@@ -28,18 +28,24 @@ export default function Upload(props: UploadProps) {
         } else toast.error("Please chose a photo.")
     }
 
+    const showPhoto = ()=> {
+      if (newPhoto !== undefined) {
+          return newPhoto
+      }
+    }
+
     return (
-        <section>
-            Upload a photo!
+        <section className="upload">
+            <h1>Upload a photo!</h1>
             <form onSubmit={onSubmit}>
-                <label htmlFor="upload photo">Select a file:</label>
-                <input type="file" id="input" accept="image/png, image/jpeg" onChange={onChange}/>
+                <label htmlFor="upload photo" className="whatToDo">Select a file:</label>
+                <input type="file" id="input" accept="image/jpeg" onChange={onChange}/>
                 <button>Upload</button>
             </form>
 
-
-            <ToastContainer closeButton={false} position="bottom-right" hideProgressBar={true} closeOnClick={true}
-                            autoClose={2000}/>
         </section>
     );
 }
+
+
+//            <img src={showPhoto()} alt={"chosen Photo"} width="300" height="auto"/>

@@ -27,9 +27,6 @@ export default function Upload(props: UploadProps) {
                 .catch((error) => toast.error("File could not be saved."))
         } else toast.error("Please chose a photo.")
     }
-    //   if (!photos) {
-//        return (<>error: photos undefined</>)
-//    }
 
     return (
         <section>
@@ -46,12 +43,3 @@ export default function Upload(props: UploadProps) {
         </section>
     );
 }
-
-// <article>
-//                 {photos.map(photo => (
-//                         <p key={photo.id} className="venues">
-//                             {photo.id}
-//                         </p>
-//                     )
-//                 )}
-//             </article>

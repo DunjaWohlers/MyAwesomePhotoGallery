@@ -5,7 +5,9 @@ import Navigation from "./Navigation";
 import Upload from "./Upload";
 import Gallery from "./Gallery";
 import Header from "./Header";
+import './App.css';
 import {ToastContainer} from "react-toastify";
+import ShowPhoto from "./ShowPhoto";
 
 export default function App() {
 
@@ -18,9 +20,11 @@ export default function App() {
                 <Navigation/>
                 <Routes>
                     <Route path={"/"}
-                           element={<Gallery photos={photos} />}/>
+                           element={<Gallery photos={photos}/>}/>
                     <Route path={"upload/"}
                            element={<Upload addPhoto={addPhoto}/>}/>
+                    <Route path={"/photo/:photoId/"}
+                           element={<ShowPhoto photos={photos}/>}/>
                 </Routes>
                 <ToastContainer closeButton={false} position="bottom-right" hideProgressBar={true} closeOnClick={true}
                                 autoClose={2000}/>

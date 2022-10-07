@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.*;
 
@@ -24,11 +25,12 @@ public class PhotoService {
         return photosBase64;
     }
 
-    public Photo addPhoto(MultipartFile newPhoto) throws IOException {
+    public Photo addPhoto(MultipartFile newPhoto, String tag) throws IOException {
         UUID uuid = UUID.randomUUID();
         String uuidAsString = uuid.toString();
         byte[] photoData = newPhoto.getBytes();
-        Photo photo = new Photo(uuidAsString, photoData);
+        String[] tags = new String[]{tag};
+        Photo photo = new Photo(uuidAsString, photoData, tags);
         return photoRepo.save(photo);
     }
 }

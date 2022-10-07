@@ -23,14 +23,15 @@ export default function usePhotos() {
         () => getPhotos(), []
     )
 
-    const addPhoto = (newPhoto: File) => {
-        let formData = new FormData()
-        formData.append("newPhoto", newPhoto)
-
-        return axios.post("photos/", formData)
+    const addPhoto = (photoData: File, tag: string) => {
+        let photoForm = new FormData()
+        photoForm.append("photo", photoData)
+        photoForm.append("tag", tag)
+        const tagData = {tag: tag}
+        return axios.post("photos/", photoForm)
             .then((response) => {
-                getPhotos()
-                return response.data
+                    getPhotos()
+                    return response.data
                 }
             );
     }

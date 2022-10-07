@@ -10,4 +10,5 @@ public class Photo {
     @Id
     String id;
     byte[] newPhoto;
+    String[] tags;
 }

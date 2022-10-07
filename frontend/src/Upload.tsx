@@ -4,13 +4,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from 'react-toastify';
 
 type UploadProps = {
-    addPhoto: (newPhoto: File) => Promise<void>,
+    addPhoto: (newPhoto: File, newTag: string) => Promise<void>,
 }
 
 export default function Upload(props: UploadProps) {
     const [newPhoto, setNewPhoto] = useState<File | undefined>(undefined);
+    const [newTag, setNewTag] = useState<string>("");
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const photo = () => {
             if (event.target.files !== null) {
                 return event.target.files[0]
@@ -19,12 +20,16 @@ export default function Upload(props: UploadProps) {
         setNewPhoto(photo())
     }
 
+    const onTagChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+                 setNewTag(event.target.value)
+             }
+
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (newPhoto !== undefined) {
-            props.addPhoto(newPhoto)
+            props.addPhoto(newPhoto, newTag)
                 .then(() => setNewPhoto(undefined))
-                .catch((error) => toast.error("File could not be saved."))
+                .catch(() => toast.error("File could not be saved."))
         } else toast.error("Please chose a photo.")
     }
 
@@ -39,10 +44,14 @@ export default function Upload(props: UploadProps) {
             <h1>Upload a photo!</h1>
             <form onSubmit={onSubmit}>
                 <label htmlFor="upload photo" className="whatToDo">Select a file:</label>
-                <input type="file" id="input" accept="image/jpeg" onChange={onChange}/>
+                <input type="file" id="input" accept="image/jpeg" onChange={onFileChange}/>
+            <article>
+                <label htmlFor="chose tag">Tag it to find it!</label>
+                <input type="text" id="tag" onChange={onTagChange}
+                       value={newTag}/>
+            </article>
                 <button>Upload</button>
             </form>
-
         </section>
     );
 }

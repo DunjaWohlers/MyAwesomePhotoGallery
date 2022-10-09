@@ -1,0 +1,37 @@
+.showPhoto {
+    padding-top: 60px;
+    display: flex;
+    flex-direction: row;
+}
+
+.actions {
+    padding-left: 175px;
+    padding-top: 60px;
+}
+
+.photo {
+    display: block;
+    margin-left: 200px;
+    margin-right: auto;
+    width: 70%;
+}
+
+.form {
+    padding-top: 70px;
+}
+
+.sendAway {
+    margin-top: 10px;
+}
+
+.back {
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+}
+
+.delete {
+    margin-top: 70px;
+}

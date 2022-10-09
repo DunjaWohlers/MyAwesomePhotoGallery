@@ -1,5 +1,6 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
+import './Navigation.css';
 
 export default function Navigation() {
     return (
@@ -8,7 +9,7 @@ export default function Navigation() {
                 <p>Photo Gallery</p>
             </NavLink>
             <NavLink to={"/upload"}>
-                <p>Upload Photo</p>
+                <p className="uploadLink">Upload Photo</p>
             </NavLink>
         </section>
     )

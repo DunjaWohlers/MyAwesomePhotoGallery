@@ -1,4 +1,4 @@
-package de.photogallery.backend;
+package de.photogallery.backend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,4 +10,5 @@ public class Photo {
     @Id
     String id;
     byte[] newPhoto;
+    String[] tags;
 }

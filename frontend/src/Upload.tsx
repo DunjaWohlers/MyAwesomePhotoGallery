@@ -1,16 +1,17 @@
 import React, {FormEvent, useState} from 'react';
-import './App.css';
+import './Upload.css';
 import 'react-toastify/dist/ReactToastify.css';
-import {toast, ToastContainer} from 'react-toastify';
+import {toast} from 'react-toastify';
 
 type UploadProps = {
-    addPhoto: (newPhoto: File) => Promise<void>,
+    addPhoto: (newPhoto: File, newTag: string) => Promise<void>,
 }
 
 export default function Upload(props: UploadProps) {
     const [newPhoto, setNewPhoto] = useState<File | undefined>(undefined);
+    const [newTag, setNewTag] = useState<string>("");
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const photo = () => {
             if (event.target.files !== null) {
                 return event.target.files[0]
@@ -19,27 +20,45 @@ export default function Upload(props: UploadProps) {
         setNewPhoto(photo())
     }
 
+    const showPhoto = () => {
+        if (newPhoto) {
+            return URL.createObjectURL(newPhoto)
+        }
+    }
+
+    const onTagChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setNewTag(event.target.value)
+    }
+
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (newPhoto !== undefined) {
-            props.addPhoto(newPhoto)
+            props.addPhoto(newPhoto, newTag)
                 .then(() => setNewPhoto(undefined))
-                .catch((error) => toast.error("File could not be saved."))
+                .then(() => setNewTag(""))
+                .then(() => toast.success("Photo was saved!."))
+                .catch(() => toast.error("File could not be saved."))
         } else toast.error("Please chose a photo.")
     }
 
     return (
-        <section>
-            Upload a photo!
-            <form onSubmit={onSubmit}>
-                <label htmlFor="upload photo">Select a file:</label>
-                <input type="file" id="input" accept="image/png, image/jpeg" onChange={onChange}/>
-                <button>Upload</button>
-            </form>
+        <section className="upload">
 
-
-            <ToastContainer closeButton={false} position="bottom-right" hideProgressBar={true} closeOnClick={true}
-                            autoClose={2000}/>
+                <h1 className="title">Upload a photo!</h1>
+            <article className="content">
+                <form onSubmit={onSubmit} className="uploadForm">
+                    <label htmlFor="upload photo" className="whatToDo">Select a file:</label>
+                    <input type="file" id="input" accept="image/jpeg" onChange={onFileChange} className="input"/>
+                    <label htmlFor="chose tag" className="tagIt">Tag it to find it! </label>
+                    <input type="text" id="tag" onChange={onTagChange}
+                           value={newTag}/>
+                    <p><button className="uploadTag">Upload</button></p>
+                </form>
+                <img src={showPhoto()} className="photoPreview" alt="Photo Preview" />
+            </article>
         </section>
     );
 }
+
+
+

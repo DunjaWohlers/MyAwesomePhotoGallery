@@ -1,0 +1,51 @@
+.upload {
+    padding-left: 140px;
+    padding-top: 25px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    padding-bottom: 30px;
+}
+
+.uploadForm {
+    padding-top: 100px;
+}
+
+.whatToDo::after {
+    content: "\A";
+    white-space: pre;
+}
+
+.input {
+    padding-bottom: 50px;
+}
+
+.tagIt::before {
+    content: "\A";
+    white-space: pre;
+}
+
+.tagIt::after {
+    content: "\A";
+    white-space: pre;
+}
+
+.uploadTag {
+    margin-top: 10px;
+}
+
+.photoPreview {
+    display: block;
+    margin-left: 170px;
+    margin-right: auto;
+    width: 55%;
+}
+
+img {
+    font-size: 0;
+}

@@ -1,4 +1,4 @@
-package de.photogallery.backend;
+package de.photogallery.backend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

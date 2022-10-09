@@ -3,7 +3,8 @@ import axios from "axios";
 
 export type Photo = {
     id: string,
-    photo: string
+    photo: string,
+    tags: string[]
 }
 
 export default function usePhotos() {
@@ -27,7 +28,6 @@ export default function usePhotos() {
         let photoForm = new FormData()
         photoForm.append("photo", photoData)
         photoForm.append("tag", tag)
-        const tagData = {tag: tag}
         return axios.post("photos/", photoForm)
             .then((response) => {
                     getPhotos()
@@ -36,5 +36,15 @@ export default function usePhotos() {
             );
     }
 
-    return {photos, addPhoto}
+    const addTag = (tag: string) => {
+        const newTag = {tag: tag}
+        return axios.put("photos/", newTag)
+            .then((response) => {
+                    getPhotos()
+                    return response.data
+                }
+            );
+    }
+
+    return {photos, addPhoto, addTag}
 }

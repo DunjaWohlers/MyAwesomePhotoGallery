@@ -1,5 +1,7 @@
 package de.photogallery.backend;
 
+import de.photogallery.backend.model.Photo;
+import de.photogallery.backend.model.PhotoBase64;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ public class PhotoController {
     private final PhotoService photoService;
 
     @GetMapping("")
-    List<PhotoInBase64> getPhotos() {
+    List<PhotoBase64> getPhotos() {
         return photoService.getPhotos();
     }
 

@@ -1,7 +1,7 @@
 import React, {FormEvent, useState} from 'react';
 import './Upload.css';
 import 'react-toastify/dist/ReactToastify.css';
-import {toast, ToastContainer} from 'react-toastify';
+import {toast} from 'react-toastify';
 
 type UploadProps = {
     addPhoto: (newPhoto: File, newTag: string) => Promise<void>,
@@ -29,6 +29,7 @@ export default function Upload(props: UploadProps) {
         if (newPhoto !== undefined) {
             props.addPhoto(newPhoto, newTag)
                 .then(() => setNewPhoto(undefined))
+                .then(() => toast.success("Photo was saved!."))
                 .catch(() => toast.error("File could not be saved."))
         } else toast.error("Please chose a photo.")
     }

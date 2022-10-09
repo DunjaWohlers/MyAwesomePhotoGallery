@@ -36,8 +36,10 @@ public class PhotoService {
         return photoRepo.save(photo);
     }
 
-    public Photo updateProject(Photo photoData) {
-        return photoRepo.save(photoData);
+    public Photo updateProject(PhotoBase64 updatedPhoto) {
+        byte[] photoData = Base64.getDecoder().decode(updatedPhoto.getPhoto());
+        Photo photo = new Photo(updatedPhoto.getId(), photoData, updatedPhoto.getTags());
+        return photoRepo.save(photo);
     }
 
     public void deletePhoto(String id) {
@@ -47,5 +49,4 @@ public class PhotoService {
             throw new ItemNotFoundException(id);
         }
     }
-
 }

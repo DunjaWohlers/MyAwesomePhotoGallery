@@ -30,10 +30,10 @@ public class PhotoController {
         return photoService.addPhoto(photo, tag);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("")
     @ResponseStatus(code = HttpStatus.OK)
-    public Photo updateProject(@PathVariable String id, @RequestBody Photo projectData) {
-        return photoService.updateProject(projectData);
+    public Photo updateProject(@RequestBody PhotoBase64 updatedPhoto) {
+        return photoService.updateProject(updatedPhoto);
     }
 
     @DeleteMapping("/{id}")

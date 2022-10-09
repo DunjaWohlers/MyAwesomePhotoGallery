@@ -48,7 +48,8 @@ export default function usePhotos() {
     }
 
     const updatePhoto = (photoId: string, newTag: string) => {
-        return axios.put("photos/" + photoId, addTag(photoId, newTag))
+        const dataToSend = addTag(photoId, newTag)
+        return axios.put("photos/", dataToSend)
             .then((response) => {
                 return response.data
             })

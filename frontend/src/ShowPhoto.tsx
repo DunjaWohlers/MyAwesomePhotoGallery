@@ -35,9 +35,9 @@ export default function ShowPhoto(props: PhotoProps) {
         setNewTag(event.target.value)
     }
 
-        const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (newTag !== undefined) {
+        if (newTag !== undefined && newTag !== "") {
             props.updatePhoto(photoId, newTag)
                 .then(() => setNewTag(""))
                 .then(() => toast.success("Tag was saved!."))

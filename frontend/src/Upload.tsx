@@ -20,42 +20,45 @@ export default function Upload(props: UploadProps) {
         setNewPhoto(photo())
     }
 
+    const showPhoto = () => {
+        if (newPhoto) {
+            return URL.createObjectURL(newPhoto)
+        }
+    }
+
     const onTagChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-                 setNewTag(event.target.value)
-             }
+        setNewTag(event.target.value)
+    }
 
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (newPhoto !== undefined) {
             props.addPhoto(newPhoto, newTag)
                 .then(() => setNewPhoto(undefined))
+                .then(() => setNewTag(""))
                 .then(() => toast.success("Photo was saved!."))
                 .catch(() => toast.error("File could not be saved."))
         } else toast.error("Please chose a photo.")
     }
 
-    const showPhoto = ()=> {
-      if (newPhoto !== undefined) {
-          return newPhoto
-      }
-    }
-
     return (
         <section className="upload">
-            <h1>Upload a photo!</h1>
-            <form onSubmit={onSubmit}>
-                <label htmlFor="upload photo" className="whatToDo">Select a file:</label>
-                <input type="file" id="input" accept="image/jpeg" onChange={onFileChange}/>
-            <article>
-                <label htmlFor="chose tag">Tag it to find it!</label>
-                <input type="text" id="tag" onChange={onTagChange}
-                       value={newTag}/>
+
+                <h1 className="title">Upload a photo!</h1>
+            <article className="content">
+                <form onSubmit={onSubmit} className="uploadForm">
+                    <label htmlFor="upload photo" className="whatToDo">Select a file:</label>
+                    <input type="file" id="input" accept="image/jpeg" onChange={onFileChange} className="input"/>
+                    <label htmlFor="chose tag" className="tagIt">Tag it to find it! </label>
+                    <input type="text" id="tag" onChange={onTagChange}
+                           value={newTag}/>
+                    <p><button className="uploadTag">Upload</button></p>
+                </form>
+                <img src={showPhoto()} className="photoPreview" alt="Photo Preview" />
             </article>
-                <button>Upload</button>
-            </form>
         </section>
     );
 }
 
 
-//            <img src={showPhoto()} alt={"chosen Photo"} width="300" height="auto"/>
+

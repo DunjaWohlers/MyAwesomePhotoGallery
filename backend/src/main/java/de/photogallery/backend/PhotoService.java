@@ -1,5 +1,6 @@
 package de.photogallery.backend;
 
+import de.photogallery.backend.exceptions.ItemNotFoundException;
 import de.photogallery.backend.model.Photo;
 import de.photogallery.backend.model.PhotoBase64;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,18 @@ public class PhotoService {
         String[] tags = new String[]{tag};
         Photo photo = new Photo(uuidAsString, photoData, tags);
         return photoRepo.save(photo);
-
     }
+
+    public Photo updateProject(Photo photoData) {
+        return photoRepo.save(photoData);
+    }
+
+    public void deletePhoto(String id) {
+        if (photoRepo.existsById(id)) {
+            photoRepo.deleteById(id);
+        } else {
+            throw new ItemNotFoundException(id);
+        }
+    }
+
 }

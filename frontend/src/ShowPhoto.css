@@ -1,12 +1,27 @@
 .showPhoto {
     padding-top: 60px;
+    display: flex;
+    flex-direction: row;
+}
+
+.actions {
+    padding-left: 175px;
+    padding-top: 60px;
 }
 
 .photo {
     display: block;
-    margin-left: auto;
+    margin-left: 200px;
     margin-right: auto;
-    width: 50%;
+    width: 70%;
+}
+
+.form {
+    padding-top: 70px;
+}
+
+.sendAway {
+    margin-top: 10px;
 }
 
 .back {
@@ -14,5 +29,9 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: auto ;
+    width: auto;
+}
+
+.delete {
+    margin-top: 70px;
 }

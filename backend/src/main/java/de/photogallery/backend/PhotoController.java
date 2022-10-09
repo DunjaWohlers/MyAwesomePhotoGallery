@@ -29,6 +29,18 @@ public class PhotoController {
             @RequestPart("tag") String tag) throws IOException {
         return photoService.addPhoto(photo, tag);
     }
+
+    @PutMapping("{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public Photo updateProject(@PathVariable String id, @RequestBody Photo projectData) {
+        return photoService.updateProject(projectData);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePhoto(@PathVariable String id) {
+        photoService.deletePhoto(id);
+    }
 }
 
 

@@ -11,7 +11,7 @@ import ShowPhoto from "./ShowPhoto";
 
 export default function App() {
 
-    const {photos, addPhoto, addTag} = usePhoto();
+    const {photos, addPhoto, updatePhoto, deletePhoto} = usePhoto();
 
     if (!photos) return (<>Loading...</>)
         return (
@@ -24,7 +24,7 @@ export default function App() {
                     <Route path={"upload/"}
                            element={<Upload addPhoto={addPhoto}/>}/>
                     <Route path={"/photo/:photoId/"}
-                           element={<ShowPhoto photos={photos} addTag={addTag}/>}/>
+                           element={<ShowPhoto photos={photos} updatePhoto={updatePhoto} deletePhoto={deletePhoto}/>}/>
                 </Routes>
                 <ToastContainer closeButton={false} position="bottom-right" hideProgressBar={true} closeOnClick={true}
                                 autoClose={2000}/>

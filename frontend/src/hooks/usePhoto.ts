@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 export type Photo = {
     id: string,
@@ -9,7 +10,7 @@ export type Photo = {
 
 export default function usePhotos() {
 
-    const [photos, setPhotos] = useState<Photo[]>()
+    const [photos, setPhotos] = useState<Photo[]>([])
 
     const getPhotos = () => {
         axios.get("photos/")
@@ -36,15 +37,37 @@ export default function usePhotos() {
             );
     }
 
-    const addTag = (tag: string) => {
-        const newTag = {tag: tag}
-        return axios.put("photos/", newTag)
-            .then((response) => {
-                    getPhotos()
-                    return response.data
-                }
-            );
+
+    const addTag = (photoId: string, newTag: string) => {
+        let photoToUpdate = photos.find((photo) => photo.id === photoId)
+        if (!photoToUpdate) {
+            return (console.log("error: photo not found"))
+        }
+        photoToUpdate.tags.push(newTag)
+        return photoToUpdate
     }
 
-    return {photos, addPhoto, addTag}
+    const updatePhoto = (photoId: string, newTag: string) => {
+        return axios.put("photos/" + photoId, addTag(photoId, newTag))
+            .then((response) => {
+                return response.data
+            })
+            .then(getPhotos)
+            .catch(
+                error => {
+                    toast.error(error.message)
+                })
+    }
+
+
+    const deletePhoto = (photoId: string) => {
+        return axios.delete("photos/" + photoId)
+            .then(getPhotos)
+            .catch(
+                error => {
+                    toast.error(error.message)
+                })
+    }
+
+    return {photos, addPhoto, updatePhoto, deletePhoto}
 }

@@ -1,12 +1,22 @@
 .gallery {
-    padding-left: 70px;
+    padding-left: 100px;
     padding-top: 25px;
 }
 
-.image {
+.photos {
     padding-top: 25px;
+    padding-left: 10px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap;
+}
+
+.photoToShow {
+   padding-top: 25px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    width: auto;
+    height: 200px;
 }

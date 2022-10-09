@@ -31,20 +31,21 @@ export default function Gallery(props: GalleryProps) {
         return dataToShow
     }
 
+    if (!props.photos) return (<>loading...</>)
+
     return (
         <section className="gallery">
             <article>
                 <h1>Gallery</h1>
             </article>
             <article>
-                <label htmlFor="chose tag">Search for Tags!</label>
+                <label htmlFor="chose tag">Search for Tags! </label>
                 <input type="text" id="tag" onChange={onChange}
                        value={tag}/>
             </article>
-            <article className="image">
+            <article className="photos">
                 {photoData().map(photo => (<Link to={"/photo/" + photo.id} key={photo.id}>
-                            <img src={"data:image/jpg;base64," + photo.photo} alt={"photo: " + photo.id} width="300"
-                                 height="auto"/>
+                            <img src={"data:image/jpg;base64," + photo.photo} alt={"photo: " + photo.id} className="photoToShow"/>
                         </Link>
                     )
                 )}

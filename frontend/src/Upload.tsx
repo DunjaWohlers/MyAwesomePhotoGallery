@@ -38,7 +38,7 @@ export default function Upload(props: UploadProps) {
                 .then(() => setNewTag(""))
                 .then(() => toast.success("Photo was saved!."))
                 .catch(() => toast.error("File could not be saved."))
-        } else toast.error("Please chose a photo.")
+        } else toast.error("Please choose a photo.")
     }
 
     return (
@@ -49,7 +49,7 @@ export default function Upload(props: UploadProps) {
                 <form onSubmit={onSubmit} className="uploadForm">
                     <label htmlFor="upload photo" className="whatToDo">Select a file:</label>
                     <input type="file" id="input" accept="image/jpeg" onChange={onFileChange} className="input"/>
-                    <label htmlFor="chose tag" className="tagIt">Tag it to find it! </label>
+                    <label htmlFor="choose tag" className="tagIt">Tag it to find it! </label>
                     <input type="text" id="tag" onChange={onTagChange}
                            value={newTag}/>
                     <p><button className="uploadTag">Upload</button></p>
